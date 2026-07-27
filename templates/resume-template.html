@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简历</title>
+  <style>
+    /* ========== CSS 变量 ========== */
+    :root {
+      --color-primary: #1a1a1a;
+      --color-secondary: #4a4a4a;
+      --color-accent: #2563eb;
+      --color-border: #e5e7eb;
+      --color-bg: #ffffff;
+      --font-cn: "PingFang SC", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
+      --font-en: "Helvetica Neue", Arial, sans-serif;
+      --font-size-body: 10.5pt;
+      --font-size-heading: 12pt;
+      --font-size-name: 20pt;
+      --line-height: 1.5;
+      --section-gap: 14pt;
+      --item-gap: 6pt;
+    }
+
+    /* ========== 打印设置 ========== */
+    @page {
+      size: A4;
+      margin: 1.5cm 2cm;
+    }
+
+    @media print {
+      body {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .job-item {
+        page-break-inside: avoid;
+      }
+      section {
+        page-break-inside: avoid;
+      }
+    }
+
+    /* ========== 全局样式 ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-cn), var(--font-en);
+      font-size: var(--font-size-body);
+      line-height: var(--line-height);
+      color: var(--color-primary);
+      background: var(--color-bg);
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 1.5cm 2cm;
+    }
+
+    /* ========== 头部区域 ========== */
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--section-gap);
+      padding-bottom: var(--section-gap);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .header-info {
+      flex: 1;
+    }
+
+    .name {
+      font-size: var(--font-size-name);
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 4pt;
+      letter-spacing: 1px;
+    }
+
+    .job-intention {
+      font-size: 11pt;
+      color: var(--color-secondary);
+      margin-bottom: 6pt;
+      font-weight: 500;
+    }
+
+    .contact-row {
+      font-size: 9.5pt;
+      color: var(--color-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12pt;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 4pt;
+    }
+
+    .avatar-slot {
+      width: 2.8cm;
+      height: 2.8cm;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-left: 20pt;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-slot.empty {
+      display: none;
+    }
+
+    .header-info.no-avatar {
+      flex: 1;
+    }
+
+    /* ========== 板块通用样式 ========== */
+    section {
+      margin-bottom: var(--section-gap);
+    }
+
+    h2 {
+      font-size: var(--font-size-heading);
+      font-weight: 700;
+      color: var(--color-primary);
+      padding-bottom: 4pt;
+      margin-bottom: 10pt;
+      border-bottom: 1px solid var(--color-border);
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 40pt;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    /* ========== 个人优势 ========== */
+    .summary-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .summary-list li {
+      position: relative;
+      padding-left: 14pt;
+      margin-bottom: 4pt;
+      font-size: var(--font-size-body);
+    }
+
+    .summary-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    /* ========== 工作经历 ========== */
+    .job-item {
+      margin-bottom: 12pt;
+    }
+
+    .job-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 4pt;
+    }
+
+    .job-company {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .job-position {
+      font-size: 10.5pt;
+      font-weight: 500;
+      color: var(--color-accent);
+      margin-left: 8pt;
+    }
+
+    .job-date {
+      font-size: 9.5pt;
+      color: var(--color-secondary);
+    }
+
+    .job-bullets {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .job-bullets li {
+      position: relative;
+      padding-left: 14pt;
+      margin-bottom: 4pt;
+      font-size: 10pt;
+      line-height: 1.6;
+    }
+
+    .job-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+      font-size: 11pt;
+    }
+
+    .job-bullets strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* ========== 项目经历 ========== */
+    .project-item {
+      margin-bottom: 10pt;
+    }
+
+    .project-name {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 2pt;
+    }
+
+    .project-role {
+      font-size: 9.5pt;
+      color: var(--color-secondary);
+      margin-bottom: 4pt;
+    }
+
+    /* ========== 教育背景 ========== */
+    .education-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6pt;
+      flex-wrap: wrap;
+    }
+
+    .edu-school {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .edu-degree {
+      font-size: 10pt;
+      color: var(--color-secondary);
+      margin-left: 8pt;
+    }
+
+    .edu-date {
+      font-size: 9.5pt;
+      color: var(--color-secondary);
+    }
+
+    /* ========== 技能清单 ========== */
+    .skills-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6pt;
+    }
+
+    .skill-category {
+      display: flex;
+      align-items: flex-start;
+      gap: 8pt;
+    }
+
+    .skill-label {
+      font-size: 10pt;
+      font-weight: 600;
+      color: var(--color-primary);
+      white-space: nowrap;
+      min-width: 60pt;
+    }
+
+    .skill-content {
+      font-size: 10pt;
+      color: var(--color-secondary);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 头部区域 ===== -->
+  <header class="resume-header">
+    <div class="header-info">
+      <div class="name">姓名</div>
+      <div class="job-intention">求职意向 · 期望城市</div>
+      <div class="contact-row">
+        <span class="contact-item">电话: 138-xxxx-xxxx</span>
+        <span class="contact-item">邮箱: email@example.com</span>
+        <span class="contact-item">所在地: 北京市</span>
+      </div>
+    </div>
+    <div class="avatar-slot empty">
+      <!-- 头像图片将通过 JS 动态插入 -->
+      <!-- <img src="avatar.jpg" alt="头像"> -->
+    </div>
+  </header>
+
+  <!-- ===== 个人优势 ===== -->
+  <section class="summary-block">
+    <h2>个人优势</h2>
+    <ul class="summary-list">
+      <li><strong>X年XX经验</strong>，擅长XX领域，曾实现XX成果数据</li>
+      <li>精通XX方法/工具，主导过XX项目，取得XX业绩</li>
+      <li>具备XX能力，有XX案例经验，善于XX</li>
+    </ul>
+  </section>
+
+  <!-- ===== 工作经历 ===== -->
+  <section class="experience-block">
+    <h2>工作经历</h2>
+
+    <article class="job-item">
+      <div class="job-header">
+        <div>
+          <span class="job-company">公司名称A</span>
+          <span class="job-position">职位名称</span>
+        </div>
+        <span class="job-date">2023.06 - 至今</span>
+      </div>
+      <ul class="job-bullets">
+        <li><strong>核心数据成果</strong>，通过XX方法/工具完成XX具体动作，实现XX业务影响</li>
+        <li><strong>量化结果2</strong>，主导XX项目，负责XX模块，达成XX目标</li>
+        <li>搭建/优化XX体系，提升XX效率，覆盖XX范围</li>
+      </ul>
+    </article>
+
+    <article class="job-item">
+      <div class="job-header">
+        <div>
+          <span class="job-company">公司名称B</span>
+          <span class="job-position">职位名称</span>
+        </div>
+        <span class="job-date">2021.03 - 2023.05</span>
+      </div>
+      <ul class="job-bullets">
+        <li><strong>数据成果</strong>，通过XX方法，实现XX结果</li>
+        <li>负责XX工作，优化XX流程，提升XX指标</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ===== 项目经历（可选） ===== -->
+  <section class="project-block" style="display: none;">
+    <h2>项目经历</h2>
+
+    <article class="project-item">
+      <div class="project-name">项目名称</div>
+      <div class="project-role">项目角色 · 2022.03 - 2022.09</div>
+      <ul class="job-bullets">
+        <li><strong>项目成果</strong>，项目背景是XX，我负责XX，通过XX方法达成XX</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ===== 教育背景 ===== -->
+  <section class="education-block">
+    <h2>教育背景</h2>
+    <div class="education-item">
+      <div>
+        <span class="edu-school">学校名称</span>
+        <span class="edu-degree">专业 · 学历</span>
+      </div>
+      <span class="edu-date">2017.09 - 2021.06</span>
+    </div>
+  </section>
+
+  <!-- ===== 技能清单 ===== -->
+  <section class="skills-block">
+    <h2>技能清单</h2>
+    <div class="skills-section">
+      <div class="skill-category">
+        <span class="skill-label">硬技能</span>
+        <span class="skill-content">技能1、技能2、技能3、技能4</span>
+      </div>
+      <div class="skill-category">
+        <span class="skill-label">工具</span>
+        <span class="skill-content">工具1、工具2、工具3</span>
+      </div>
+      <div class="skill-category">
+        <span class="skill-label">软技能</span>
+        <span class="skill-content">能力1、能力2、能力3</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

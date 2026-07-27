@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>求职策略建议书</title>
+  <style>
+    :root {
+      --color-primary: #1a1a1a;
+      --color-secondary: #4a4a4a;
+      --color-accent: #2563eb;
+      --color-success: #059669;
+      --color-warning: #d97706;
+      --color-danger: #dc2626;
+      --color-bg: #f8fafc;
+      --color-card: #ffffff;
+      --color-border: #e5e7eb;
+      --font-cn: "PingFang SC", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
+      --font-en: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-cn), var(--font-en);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--color-primary);
+      background: var(--color-bg);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .advice-header {
+      background: linear-gradient(135deg, var(--color-accent), #1e40af);
+      color: white;
+      padding: 32px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .advice-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .advice-header .subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .advice-header .job-info {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .advice-header .job-info span {
+      font-size: 13px;
+      opacity: 0.95;
+    }
+
+    .section {
+      background: var(--color-card);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--color-accent);
+      display: inline-block;
+    }
+
+    .section h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: 16px 0 10px 0;
+    }
+
+    .section h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-secondary);
+      margin: 12px 0 6px 0;
+    }
+
+    .match-overview {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .match-score {
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .match-score .score-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1;
+    }
+
+    .match-score .score-label {
+      font-size: 13px;
+      color: var(--color-secondary);
+      margin-top: 6px;
+    }
+
+    .match-score .score-level {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .score-level.high {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .score-level.medium {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .score-level.low {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .match-details {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .match-item {
+      margin-bottom: 12px;
+    }
+
+    .match-item-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .match-item-label .name {
+      font-weight: 500;
+    }
+
+    .match-item-label .score {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .match-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .match-bar-fill {
+      height: 100%;
+      background: var(--color-accent);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .match-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .match-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .match-card {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+    }
+
+    .match-card.matched {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+    }
+
+    .match-card.gap {
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .match-card h4 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .match-card.matched h4 {
+      color: #166534;
+    }
+
+    .match-card.gap h4 {
+      color: #991b1b;
+    }
+
+    .match-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .match-card li {
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .match-card li:last-child {
+      border-bottom: none;
+    }
+
+    .match-card li .skill {
+      font-weight: 500;
+    }
+
+    .match-card li .evidence {
+      color: var(--color-secondary);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .rewrite-compare {
+      margin-bottom: 16px;
+    }
+
+    .rewrite-item {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .rewrite-row {
+      display: flex;
+      padding: 12px 16px;
+      font-size: 13px;
+    }
+
+    .rewrite-row.before {
+      background: #fef2f2;
+      border-bottom: 1px dashed #fecaca;
+    }
+
+    .rewrite-row.after {
+      background: #f0fdf4;
+    }
+
+    .rewrite-label {
+      font-weight: 600;
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .rewrite-row.before .rewrite-label {
+      color: #991b1b;
+    }
+
+    .rewrite-row.after .rewrite-label {
+      color: #166534;
+    }
+
+    .rewrite-content {
+      flex: 1;
+    }
+
+    .risk-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .risk-item {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .risk-item.high {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    .risk-item.medium {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+    }
+
+    .risk-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .risk-text strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .action-list {
+      list-style: none;
+      padding: 0;
+      counter-reset: action-counter;
+    }
+
+    .action-item {
+      position: relative;
+      padding: 12px 16px 12px 48px;
+      margin-bottom: 8px;
+      background: #eff6ff;
+      border-radius: 8px;
+      font-size: 13px;
+      counter-increment: action-counter;
+    }
+
+    .action-item::before {
+      content: counter(action-counter);
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--color-accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .action-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--color-primary);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--color-secondary);
+    }
+
+    .advice-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 头部 -->
+  <div class="advice-header">
+    <h1>求职策略建议书</h1>
+    <p class="subtitle">资深 HR 视角 · 价值导向 · 助力你的下一份理想工作</p>
+    <div class="job-info">
+      <span>目标岗位：产品运营经理</span>
+      <span>目标公司：某某科技有限公司</span>
+      <span>薪资范围：20-30K</span>
+    </div>
+  </div>
+
+  <!-- 01. 岗位匹配度总览 -->
+  <div class="section">
+    <h2>01 · 岗位匹配度总览</h2>
+
+    <div class="match-overview">
+      <div class="match-score">
+        <div class="score-number">78</div>
+        <div class="score-label">总匹配度</div>
+        <span class="score-level high">良好匹配</span>
+      </div>
+      <div class="match-details">
+        <div class="match-item">
+          <div class="match-item-label">
+            <span class="name">硬技能匹配</span>
+            <span class="score">28/35</span>
+          </div>
+          <div class="match-bar"><div class="match-bar-fill" style="width: 80%"></div></div>
+        </div>
+        <div class="match-item">
+          <div class="match-item-label">
+            <span class="name">经验匹配</span>
+            <span class="score">20/25</span>
+          </div>
+          <div class="match-bar"><div class="match-bar-fill" style="width: 80%"></div></div>
+        </div>
+        <div class="match-item">
+          <div class="match-item-label">
+            <span class="name">软技能匹配</span>
+            <span class="score">11/15</span>
+          </div>
+          <div class="match-bar"><div class="match-bar-fill" style="width: 73%"></div></div>
+        </div>
+        <div class="match-item">
+          <div class="match-item-label">
+            <span class="name">成果匹配</span>
+            <span class="score">12/15</span>
+          </div>
+          <div class="match-bar"><div class="match-bar-fill" style="width: 80%"></div></div>
+        </div>
+        <div class="match-item">
+          <div class="match-item-label">
+            <span class="name">学历匹配</span>
+            <span class="score">7/10</span>
+          </div>
+          <div class="match-bar"><div class="match-bar-fill" style="width: 70%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>匹配项 vs 缺口项</h3>
+    <div class="match-list">
+      <div class="match-card matched">
+        <h4>命中的核心能力</h4>
+        <ul>
+          <li>
+            <span class="skill">用户运营</span>
+            <div class="evidence">3 年用户运营经验，主导过用户增长项目</div>
+          </li>
+          <li>
+            <span class="skill">数据分析</span>
+            <div class="evidence">熟练使用 SQL/Tableau，有数据驱动增长案例</div>
+          </li>
+          <li>
+            <span class="skill">项目管理</span>
+            <div class="evidence">跨部门协作经验，曾统筹 5 人项目</div>
+          </li>
+        </ul>
+      </div>
+      <div class="match-card gap">
+        <h4>待提升的能力</h4>
+        <ul>
+          <li>
+            <span class="skill">增长黑客方法论</span>
+            <div class="evidence">建议：补充 AARRR 模型相关项目经验</div>
+          </li>
+          <li>
+            <span class="skill">B 端运营经验</span>
+            <div class="evidence">建议：强调可迁移的运营方法论</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02. 简历调整说明 -->
+  <div class="section">
+    <h2>02 · 简历调整说明</h2>
+
+    <h3>针对该岗位做的侧重调整</h3>
+    <ul style="padding-left: 20px; font-size: 13px; margin-bottom: 16px;">
+      <li>将用户增长相关经历置顶并详写（从 2 条扩展至 4 条价值条目）</li>
+      <li>强化数据驱动表述，增加 SQL、Tableau 等关键词出现频次</li>
+      <li>个人优势全部围绕"用户增长 + 数据驱动"核心诉求定制</li>
+      <li>精简了内容运营相关经历（与岗位关联度较低）</li>
+    </ul>
+
+    <h3>改写前后对比</h3>
+    <div class="rewrite-compare">
+      <div class="rewrite-item">
+        <div class="rewrite-row before">
+          <span class="rewrite-label">改写前</span>
+          <span class="rewrite-content">负责用户运营工作，参与用户增长项目</span>
+        </div>
+        <div class="rewrite-row after">
+          <span class="rewrite-label">改写后</span>
+          <span class="rewrite-content"><strong>用户增长 3 倍</strong>，主导精细化运营项目，通过用户分层 + A/B 测试优化触达策略，月活从 10 万提升至 30 万，转化率提升 25%</span>
+        </div>
+      </div>
+      <div class="rewrite-item">
+        <div class="rewrite-row before">
+          <span class="rewrite-label">改写前</span>
+          <span class="rewrite-content">做运营数据的分析和汇报</span>
+        </div>
+        <div class="rewrite-row after">
+          <span class="rewrite-label">改写后</span>
+          <span class="rewrite-content"><strong>运营效率提升 40%</strong>，用 SQL + Tableau 搭建自动化经营看板，将每周数据统计时间从 15 小时压缩至 9 小时</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>ATS 关键词覆盖</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>关键词类型</th>
+          <th>岗位要求</th>
+          <th>简历命中</th>
+          <th>覆盖度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>硬技能</td>
+          <td>用户运营、数据分析、A/B测试、SQL</td>
+          <td>用户运营、数据分析、A/B测试、SQL、Tableau</td>
+          <td style="color: var(--color-success);">100%</td>
+        </tr>
+        <tr>
+          <td>软技能</td>
+          <td>沟通协调、项目管理、学习能力</td>
+          <td>跨部门协作、项目统筹、快速学习</td>
+          <td style="color: var(--color-success);">90%</td>
+        </tr>
+        <tr>
+          <td>行业词</td>
+          <td>互联网、SaaS、增长</td>
+          <td>互联网、用户增长、精细化运营</td>
+          <td style="color: var(--color-warning);">75%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 03. 面试准备方向 -->
+  <div class="section">
+    <h2>03 · 面试准备方向</h2>
+
+    <h3>产品理解</h3>
+    <ul style="padding-left: 20px; font-size: 13px; margin-bottom: 12px;">
+      <li>了解目标公司的核心产品/业务模式，建议访问官网和 App Store 评价</li>
+      <li>研究产品的核心功能、用户群体、商业模式</li>
+      <li>准备 2-3 个对产品的观察和改进建议（体现产品思维）</li>
+    </ul>
+
+    <h3>行业洞察</h3>
+    <ul style="padding-left: 20px; font-size: 13px; margin-bottom: 12px;">
+      <li>关注所在行业 2024-2026 年最新趋势报告</li>
+      <li>了解主要竞品动态和市场格局</li>
+      <li>准备 1-2 个行业热点话题的个人见解</li>
+    </ul>
+
+    <h3>消费者洞察</h3>
+    <ul style="padding-left: 20px; font-size: 13px; margin-bottom: 12px;">
+      <li>研究目标用户画像和核心需求痛点</li>
+      <li>了解用户决策路径和关键触点</li>
+      <li>可搜索小红书/知乎等平台的用户真实反馈</li>
+    </ul>
+
+    <h3>预判面试问题</h3>
+    <div class="action-list">
+      <div class="action-item">
+        <strong>自我介绍</strong>
+        准备 1 分钟和 3 分钟两个版本，围绕"用户增长+数据驱动"核心，突出最亮眼的成果
+      </div>
+      <div class="action-item">
+        <strong>最有成就感的项目</strong>
+        用 STAR 法则准备用户增长项目的详细案例，准备好数据细节和挑战应对
+      </div>
+      <div class="action-item">
+        <strong>为什么想加入我们</strong>
+        结合公司产品和行业趋势，表达真实的兴趣和匹配度
+      </div>
+      <div class="action-item">
+        <strong>你的缺点是什么</strong>
+        选一个真实但不致命的缺点，说明正在如何改进，体现自我认知和成长能力
+      </div>
+    </div>
+  </div>
+
+  <!-- 04. 薪资谈判参考 -->
+  <div class="section">
+    <h2>04 · 薪资谈判参考</h2>
+
+    <h3>岗位薪资范围</h3>
+    <p style="font-size: 13px; margin-bottom: 12px;">
+      <strong style="font-size: 18px; color: var(--color-accent);">20-30K · 14薪</strong>
+      <span style="color: var(--color-secondary); margin-left: 12px;">来自 BOSS 直聘岗位信息</span>
+    </p>
+
+    <h3>薪资定位建议</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>匹配等级</th>
+          <th>建议区间</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color: var(--color-success); font-weight: 600;">强力争取</td>
+          <td>27-30K</td>
+          <td>如果面试表现优异，成果数据亮眼，可冲击上限</td>
+        </tr>
+        <tr>
+          <td style="color: var(--color-accent); font-weight: 600;">目标区间</td>
+          <td>24-27K</td>
+          <td>匹配度良好，正常发挥可达到的合理范围</td>
+        </tr>
+        <tr>
+          <td style="color: var(--color-warning); font-weight: 600;">保底预期</td>
+          <td>20-23K</td>
+          <td>面试一般但仍通过的情况下的最低预期</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 16px;">谈判筹码梳理</h3>
+    <ul style="padding-left: 20px; font-size: 13px;">
+      <li><strong>核心筹码：</strong>用户增长 3 倍的项目经验（直接匹配岗位核心诉求）</li>
+      <li><strong>加分筹码：</strong>数据分析能力 + 跨部门协作经验</li>
+      <li><strong>其他筹码：</strong>学历背景、公司背书、行业经验年限</li>
+    </ul>
+  </div>
+
+  <!-- 05. 风险与避雷提示 -->
+  <div class="section">
+    <h2>05 · 风险与避雷提示</h2>
+
+    <h3>岗位风险信号</h3>
+    <ul class="risk-list">
+      <li class="risk-item medium">
+        <span class="risk-icon">⚠</span>
+        <div class="risk-text">
+          <strong>招聘急迫度偏高</strong>
+          岗位发布 2 周内频繁刷新，可能是人员流失严重或项目紧急需要救火。面试时可询问团队稳定性和项目背景。
+        </div>
+      </li>
+      <li class="risk-item high">
+        <span class="risk-icon">!</span>
+        <div class="risk-text">
+          <strong>"能承受工作压力"表述</strong>
+          岗位描述中出现"创业精神""抗压能力强"等措辞，暗示加班文化。建议面试时委婉了解工作节奏和加班情况。
+        </div>
+      </li>
+    </ul>
+
+    <h3>简历风险点</h3>
+    <ul class="risk-list">
+      <li class="risk-item medium">
+        <span class="risk-icon">⚠</span>
+        <div class="risk-text">
+          <strong>B 端运营经验缺失</strong>
+          岗位有 B 端运营要求，但你的经验以 C 端为主。建议提前准备好 C 端方法论如何迁移到 B 端的思考框架。
+        </div>
+      </li>
+    </ul>
+
+    <h3>建议核实事项</h3>
+    <ul style="padding-left: 20px; font-size: 13px;">
+      <li>团队规模和汇报关系（直接向谁汇报，团队几个人）</li>
+      <li>这个岗位为什么在招人（是新增还是替补）</li>
+      <li>试用期时长和考核标准</li>
+      <li>公司融资情况和盈利状况</li>
+      <li>入职后的前 3 个月核心目标是什么</li>
+    </ul>
+  </div>
+
+  <!-- 06. 行动建议 -->
+  <div class="section">
+    <h2>06 · 行动建议</h2>
+
+    <div class="action-list">
+      <div class="action-item">
+        <strong>投递时机</strong>
+        建议本周内投递。岗位刚发布不久，HR 还在大量筛选简历，早投递有先发优势。避开周一上午和周五下午投递高峰期。
+      </div>
+      <div class="action-item">
+        <strong>简历最后一公里优化</strong>
+        根据岗位 JD 再微调一次关键词，确保每一个核心技能词都在简历中出现至少一次。文件名建议用"姓名-应聘岗位-年限"格式。
+      </div>
+      <div class="action-item">
+        <strong>投递渠道策略</strong>
+        BOSS 直聘直接投递 + 内推并行。如果能找到该公司员工内推，通过率会高很多。可在脉脉/LinkedIn 上寻找。
+      </div>
+      <div class="action-item">
+        <strong>面试准备计划</strong>
+        投递后立即开始准备：① 深入研究公司和产品 ② 准备 3-5 个 STAR 案例 ③ 练习自我介绍和常见问题 ④ 准备 3 个向面试官提问的问题
+      </div>
+      <div class="action-item">
+        <strong>后续跟进策略</strong>
+        投递后 3-5 天未收到回复，可在 BOSS 上主动发消息跟进一次，表达诚意。如获面试，面试后 24 小时内发送感谢信。
+      </div>
+    </div>
+  </div>
+
+  <div class="advice-footer">
+    本建议书由简历精修技能自动生成，仅供参考。祝你求职顺利，拿到心仪的 offer！
+  </div>
+
+</body>
+</html>
