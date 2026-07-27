@@ -4,6 +4,7 @@
   "description": "资深HR视角的价值导向简历精修技能",
   "private": true,
   "dependencies": {
+    "docx": "^9.7.1",
     "playwright": "^1.40.0"
   }
 }
