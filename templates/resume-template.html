@@ -4,347 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>个人简历</title>
-  <style>
-    /* ========== CSS 变量 ========== */
+<style>
     :root {
       --color-primary: #1a1a1a;
-      --color-secondary: #4a4a4a;
+      --color-secondary: #555555;
       --color-accent: #2563eb;
-      --color-border: #e5e7eb;
-      --color-bg: #ffffff;
+      --color-border: #e0e5eb;
       --font-cn: "PingFang SC", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
       --font-en: "Helvetica Neue", Arial, sans-serif;
-      --font-size-body: 11pt;
-      --font-size-heading: 13pt;
-      --font-size-name: 20pt;
-      --line-height: 1.6;
-      --section-gap: 14pt;
-      --item-gap: 6pt;
     }
-
-    /* ========== 打印设置 ========== */
-    @page {
-      size: A4;
-      margin: 10pt 0 0 0;
-    }
-
+    @page { size: A4; margin: 12pt 0 0 0; }
     @media print {
-      body {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-      }
-      .job-item {
-        page-break-inside: avoid;
-      }
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      /* 允许 section 跨页，但单个 job-item 尽量不分页 */
+      .job-item { page-break-inside: avoid; }
     }
-
-    /* ========== 全局样式 ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: var(--font-cn), var(--font-en);
-      font-size: var(--font-size-body);
-      line-height: var(--line-height);
+      font-size: 12pt;
+      line-height: 1.75;
       color: var(--color-primary);
-      background: var(--color-bg);
       max-width: 210mm;
       margin: 0 auto;
-      padding: 18pt 20pt 10pt 20pt;
       position: relative;
     }
-
-    /* ========== 头部区域 ========== */
-    .resume-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 18pt 20pt 10pt 20pt;
-      margin-bottom: 14pt;
-      margin-left: -20pt;
-      margin-right: -20pt;
-      margin-top: -18pt;
-      border-bottom: 2px solid var(--color-accent);
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-info {
-      flex: 1;
-    }
-
-    .name {
-      font-size: var(--font-size-name);
-      font-weight: 700;
-      color: var(--color-accent);
-      margin-bottom: 4pt;
-      letter-spacing: 1px;
-    }
-
-    .job-intention {
-      font-size: 11pt;
-      color: var(--color-secondary);
-      margin-bottom: 6pt;
-      font-weight: 500;
-    }
-
-    .contact-row {
-      font-size: 9.5pt;
-      color: var(--color-secondary);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12pt;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 4pt;
-    }
-
-    .avatar-slot {
-      width: 2.8cm;
-      height: 2.8cm;
-      border-radius: 50%;
-      overflow: hidden;
-      flex-shrink: 0;
-      margin-left: 20pt;
-      background: #f3f4f6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2pt;
-    }
-
-    .avatar-slot img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .header-info.no-avatar {
-      flex: 1;
-    }
-
-    /* ========== 板块通用样式 ========== */
-    section {
-      margin-bottom: 14pt;
-    }
-
-    section:last-child {
-      margin-bottom: 0;
-    }
-
-    h2 {
-      font-size: var(--font-size-heading);
-      font-weight: 700;
-      color: var(--color-primary);
-      margin-bottom: 10pt;
-      padding-bottom: 5pt;
-      border-bottom: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      gap: 5pt;
-    }
-
-    h2::before {
-      content: "\25A0";
-      font-size: 9pt;
-      color: var(--color-accent);
-      line-height: 1;
-    }
-
-    /* ========== 教育背景 ========== */
-    .education-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6pt;
-      flex-wrap: wrap;
-    }
-
-    .edu-school {
-      font-size: 11pt;
-      font-weight: 600;
-      color: var(--color-primary);
-    }
-
-    .edu-degree {
-      font-size: 10pt;
-      color: var(--color-secondary);
-      margin-left: 8pt;
-    }
-
-    .edu-date {
-      font-size: 9.5pt;
-      color: var(--color-secondary);
-    }
-
-    /* ========== 个人优势 ========== */
-    .summary-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .summary-list li {
-      position: relative;
-      padding-left: 12pt;
-      margin-bottom: 5pt;
-      font-size: var(--font-size-body);
-    }
-
-    .summary-list li::before {
-      content: "\2022";
-      position: absolute;
-      left: 0;
-      color: var(--color-accent);
-      font-weight: bold;
-    }
-
-    /* ========== 工作经历 ========== */
-    .experience-block {
-      position: relative;
-      counter-reset: job-counter;
-      padding-left: 18pt;
-    }
-
-    .experience-block > h2 {
-      margin-left: -18pt;
-    }
-
-    .job-item {
-      position: relative;
-      counter-increment: job-counter;
-      margin-top: 6pt;
-      padding-top: 2pt;
-      margin-bottom: 12pt;
-    }
-
-    .job-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .job-item::before {
-      content: counter(job-counter);
-      position: absolute;
-      left: -22pt;
-      top: 0;
-      font-size: 14pt;
-      font-weight: 800;
-      color: var(--color-accent);
-      opacity: 0.5;
-      line-height: 1;
-      font-style: italic;
-      font-family: var(--font-en), var(--font-cn);
-    }
-
-    .job-item:first-child::before {
-      top: -1pt;
-    }
-
-    .job-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      margin-bottom: 4pt;
-    }
-
-    .job-company {
-      font-size: 11pt;
-      font-weight: 600;
-      color: var(--color-primary);
-    }
-
-    .job-position {
-      font-size: 10.5pt;
-      font-weight: 500;
-      color: var(--color-accent);
-      margin-left: 8pt;
-    }
-
-    .job-date {
-      font-size: 9.5pt;
-      color: var(--color-secondary);
-    }
-
-    .job-bullets {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .job-bullets li {
-      position: relative;
-      padding-left: 14pt;
-      margin-bottom: 4pt;
-      font-size: 10pt;
-      line-height: 1.6;
-    }
-
-    .job-bullets li::before {
-      content: "\2022";
-      position: absolute;
-      left: 0;
-      top: 1pt;
-      color: var(--color-accent);
-      font-weight: bold;
-      font-size: 11pt;
-    }
-
-    .job-bullets strong {
-      color: var(--color-primary);
-      font-weight: 600;
-    }
-
-    /* ========== 项目经历 ========== */
-    .project-item {
-      margin-bottom: 10pt;
-    }
-
-    .project-name {
-      font-size: 11pt;
-      font-weight: 600;
-      color: var(--color-primary);
-      margin-bottom: 2pt;
-    }
-
-    .project-role {
-      font-size: 9.5pt;
-      color: var(--color-secondary);
-      margin-bottom: 4pt;
-    }
-
-    /* ========== 技能清单 ========== */
-    .skills-section {
-      display: flex;
-      flex-direction: column;
-      gap: 3pt;
-    }
-
-    .skill-category {
-      display: flex;
-      align-items: flex-start;
-      gap: 8pt;
-    }
-
-    .skill-label {
-      font-size: 10pt;
-      font-weight: 600;
-      color: var(--color-primary);
-      white-space: nowrap;
-      min-width: 60pt;
-    }
-
-    .skill-content {
-      font-size: 10pt;
-      color: var(--color-secondary);
-      line-height: 1.6;
-    }
-
-    /* ========== 装饰性圆圈水印 ========== */
+    /* ===== 圆圈底纹装饰 ===== */
     .watermark-circle-1 {
       position: absolute;
       top: 60pt;
@@ -357,78 +42,226 @@
       z-index: 0;
       pointer-events: none;
     }
-
     .watermark-circle-2 {
       position: absolute;
-      top: 180pt;
-      right: 60pt;
-      width: 60pt;
-      height: 60pt;
-      border-radius: 50%;
-      border: 1.5px solid var(--color-accent);
-      opacity: 0.04;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .watermark-circle-3 {
-      position: absolute;
-      top: 400pt;
-      left: 10pt;
-      width: 80pt;
-      height: 80pt;
-      border-radius: 50%;
-      border: 1.5px solid var(--color-accent);
-      opacity: 0.05;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .watermark-circle-4 {
-      position: absolute;
-      top: 700pt;
-      right: 30pt;
-      width: 120pt;
-      height: 120pt;
-      border-radius: 50%;
-      border: 1.5px solid var(--color-accent);
-      opacity: 0.03;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .watermark-circle-5 {
-      position: absolute;
-      top: 950pt;
-      left: 50pt;
+      top: 130pt;
+      right: 70pt;
       width: 50pt;
       height: 50pt;
       border-radius: 50%;
-      border: 1.5px solid var(--color-accent);
+      border: 1px solid var(--color-accent);
+      opacity: 0.08;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .watermark-circle-3 {
+      position: absolute;
+      bottom: 80pt;
+      left: 15pt;
+      width: 70pt;
+      height: 70pt;
+      border-radius: 50%;
+      border: 1px solid var(--color-accent);
+      opacity: 0.06;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .watermark-circle-4 {
+      position: absolute;
+      bottom: 140pt;
+      left: 60pt;
+      width: 35pt;
+      height: 35pt;
+      border-radius: 50%;
+      border: 1px solid var(--color-accent);
       opacity: 0.05;
       z-index: 0;
       pointer-events: none;
     }
+    .watermark-circle-5 {
+      position: absolute;
+      top: 420pt;
+      right: 40pt;
+      width: 55pt;
+      height: 55pt;
+      border-radius: 50%;
+      border: 1px solid var(--color-accent);
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* ===== 头部区域 ===== */
+    .resume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 22pt 24pt 12pt 24pt;
+      position: relative;
+      z-index: 1;
+    }
+    .resume-header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 24pt;
+      right: 24pt;
+      height: 2px;
+      background: var(--color-accent);
+    }
+    .header-info { flex: 1; }
+    .name {
+      font-size: 23pt;
+      font-weight: 800;
+      color: var(--color-accent);
+      margin-bottom: 5pt;
+      letter-spacing: 2px;
+    }
+    .contact-row {
+      font-size: 10.5pt;
+      color: var(--color-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18pt;
+    }
+    .avatar-slot {
+      width: 68pt;
+      height: 68pt;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-left: 20pt;
+      border: 2px solid var(--color-accent);
+      opacity: 0.95;
+    }
+    .avatar-slot img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ===== 内容区 ===== */
+    .content-area {
+      padding: 12pt 24pt 18pt 24pt;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== 板块通用样式 ===== */
+    section { margin-bottom: 14pt; }
+    section:last-child { margin-bottom: 0; }
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--color-primary);
+      padding-bottom: 5pt;
+      margin-bottom: 10pt;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 5pt;
+    }
+    h2::before {
+      content: "\25A0";
+      font-size: 9pt;
+      color: var(--color-accent);
+      line-height: 1;
+    }
+
+    /* ===== 教育背景 ===== */
+    .education-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .edu-school { font-size: 12pt; font-weight: 600; }
+    .edu-degree { font-size: 11pt; color: var(--color-secondary); margin-left: 6pt; }
+    .edu-date { font-size: 10.5pt; color: var(--color-secondary); }
+
+    /* ===== 列表通用 ===== */
+    .summary-list, .job-bullets { list-style: none; padding: 0; }
+    .summary-list li, .job-bullets li {
+      position: relative;
+      padding-left: 12pt;
+      margin-bottom: 5pt;
+      font-size: 11pt;
+      line-height: 1.75;
+    }
+    .summary-list li::before, .job-bullets li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+      font-size: 10pt;
+    }
+    .summary-list li::before { top: 0; }
+    .job-bullets li::before { top: 1pt; }
+
+    /* ===== 工作经历 ===== */
+    .job-item { margin-bottom: 12pt; }
+    .job-item:last-child { margin-bottom: 0; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 2pt;
+    }
+    .job-company { font-size: 12pt; font-weight: 600; }
+    .job-position { font-size: 11pt; font-weight: 500; color: var(--color-accent); margin-left: 6pt; }
+    .job-date { font-size: 10.5pt; color: var(--color-secondary); }
+    .job-bullets strong { color: var(--color-primary); font-weight: 600; }
+    
+    /* 工作经历编号标记 */
+    .experience-section {
+      position: relative;
+      counter-reset: job-counter;
+      padding-left: 18pt;
+    }
+    .experience-section > h2 {
+      margin-left: -18pt;
+    }
+    .experience-section .job-item {
+      position: relative;
+      counter-increment: job-counter;
+      margin-top: 6pt;
+      padding-top: 2pt;
+    }
+    .experience-section .job-item::before {
+      content: counter(job-counter);
+      position: absolute;
+      left: -22pt;
+      top: 0;
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--color-accent);
+      opacity: 0.5;
+      line-height: 1;
+      font-style: italic;
+      font-family: var(--font-en), var(--font-cn);
+    }
+    .experience-section .job-item:first-child::before {
+      top: -1pt;
+    }
+
+    /* ===== 技能清单 ===== */
+    .skills-section { display: flex; flex-direction: column; gap: 3pt; }
+    .skill-category { display: flex; align-items: flex-start; gap: 8pt; }
+    .skill-label { font-size: 11pt; font-weight: 600; white-space: nowrap; min-width: 55pt; }
+    .skill-content { font-size: 11pt; color: var(--color-secondary); line-height: 1.75; }
   </style>
 </head>
 <body>
-
-  <!-- 装饰性圆圈水印 -->
   <div class="watermark-circle-1"></div>
   <div class="watermark-circle-2"></div>
   <div class="watermark-circle-3"></div>
   <div class="watermark-circle-4"></div>
   <div class="watermark-circle-5"></div>
 
-  <!-- ===== 头部区域 ===== -->
   <header class="resume-header">
     <div class="header-info">
-      <div class="name">姓名</div>
-      <div class="job-intention">求职意向 · 期望城市</div>
+      <div class="name">朱嘉欣</div>
       <div class="contact-row">
-        <span class="contact-item">电话: 138-xxxx-xxxx</span>
-        <span class="contact-item">邮箱: email@example.com</span>
-        <span class="contact-item">所在地: 北京市</span>
+        <span>13360282215</span>
+        <span>1543303737@qq.com</span>
+        <span>广东省深圳市</span>
       </div>
     </div>
     <div class="avatar-slot">
@@ -436,93 +269,105 @@
     </div>
   </header>
 
-  <!-- ===== 教育背景 ===== -->
-  <section class="education-block">
+  <div class="content-area">
+
+  <section>
     <h2>教育背景</h2>
     <div class="education-item">
       <div>
-        <span class="edu-school">学校名称</span>
-        <span class="edu-degree">专业 · 学历</span>
+        <span class="edu-school">广东外语外贸大学</span>
+        <span class="edu-degree">商务英语（商务管理分流方向）· 本科</span>
       </div>
-      <span class="edu-date">2017.09 - 2021.06</span>
+      <span class="edu-date">2020.09 - 2024.06</span>
     </div>
-  </section>
-
-  <!-- ===== 个人优势 ===== -->
-  <section class="summary-block">
-    <h2>个人优势</h2>
-    <ul class="summary-list">
-      <li><strong>X年XX经验</strong>，擅长XX领域，曾实现XX成果数据</li>
-      <li>精通XX方法/工具，主导过XX项目，取得XX业绩</li>
-      <li>具备XX能力，有XX案例经验，善于XX</li>
+    <ul class="job-bullets" style="margin-top:2pt">
+      <li>GPA：3.56 / 4.0（年级前50%）· 主修：综合商务英语、营销学原理、国际贸易实务、商务笔译、人力资源管理等</li>
     </ul>
   </section>
 
-  <!-- ===== 工作经历 ===== -->
-  <section class="experience-block">
+  <section>
+    <h2>个人优势</h2>
+    <ul class="summary-list">
+      <li><strong>1.5年化妆品产品开发实战经验</strong>，负责6个品牌20+ SKU的开发与维护（含部分现有跨境品品牌维护），已成功上市新品10+，其中雪花膏单品实现月销40万、年销300万</li>
+      <li><strong>全链路产品管理能力</strong>，覆盖市场调研、竞品分析、配方打样、包装设计、供应链对接、备案合规全流程；独立搭建并管理4家设计团队及6家原料/包材工厂对接</li>
+      <li><strong>市场敏感度高</strong>，曾赴韩国调研彩妆成分与包装趋势，以"跨境+高性价比"差异化策略切入下沉市场；主导雪花膏新中式包装设计创新，产品成功进入上海热门景区渠道</li>
+      <li><strong>英语专业八级</strong>，具备跨境产品信息翻译及资质文件处理能力，可支撑品牌国际化业务需求</li>
+    </ul>
+  </section>
+
+  <section class="experience-section">
     <h2>工作经历</h2>
 
     <article class="job-item">
       <div class="job-header">
         <div>
-          <span class="job-company">公司名称A</span>
-          <span class="job-position">职位名称</span>
+          <span class="job-company">深圳帝华盛耀贸易有限公司</span>
+          <span class="job-position">品牌助理（产品开发方向）</span>
         </div>
-        <span class="job-date">2023.06 - 至今</span>
+        <span class="job-date">2024.09 - 2026.04</span>
       </div>
       <ul class="job-bullets">
-        <li><strong>核心数据成果</strong>，通过XX方法/工具完成XX具体动作，实现XX业务影响</li>
-        <li><strong>量化结果2</strong>，主导XX项目，负责XX模块，达成XX目标</li>
-        <li>搭建/优化XX体系，提升XX效率，覆盖XX范围</li>
+        <li><strong>【产品开发全链路管理】</strong>负责护肤品从0到1开发全流程（含部分现有跨境品品牌维护），涵盖市场调研、竞品分析、新品立项方案输出；对接工厂跟进配方打样与试样，针对气味、肤感、稳定性提出调整建议直至定版；统筹产品备案跟进及标签合规审核，已成功上市新品10+</li>
+        <li><strong>【爆款打造与市场验证】</strong>主导雪花膏单品开发，通过雪花膏新中式包装差异化定位（礼品属性+高性价比），实现月销40万、年销300万；产品成功进入上海热门景区渠道铺货，验证市场接受度</li>
+        <li><strong>【跨境市场调研与策略制定】</strong>赴韩国调研当地畅销彩妆成分与包装形式，以"跨境+高性价比"为创新点，结合下沉市场（二三线城市）策略，完成产品定位与上市规划</li>
+        <li><strong>【包装供应链全流程管理】</strong>负责包材选型、设计文案定调、风格审核及法规审查；跟进打样跟色，落地包装10+；独立开发并管理4家稳定设计团队（完成询价比价议价及合同签署）及6家原料/包材工厂对接</li>
+        <li><strong>【产品体验优化】</strong>根据产品属性持续优化用户体验：调整膏体流动性、改善沐浴露洗感及泡沫程度、优化手霜面霜香味配比、调整面膜膜布大小与精华浓度、改善素颜霜顺滑度及假白问题</li>
+        <li><strong>【品牌视觉物料统筹】</strong>统筹线上线下宣传物料（详情页、画册、展架、海报、展会等）的设计制作，对接设计及摄影外包团队，把控出品质量，确保品牌调性统一</li>
+        <li><strong>【跨部门协作】</strong>高效对接电商部、采购部、财务部，协调推进产品上市进度；短暂带教新人完成品宣物料制作，保障团队产出效率</li>
       </ul>
     </article>
 
     <article class="job-item">
       <div class="job-header">
         <div>
-          <span class="job-company">公司名称B</span>
-          <span class="job-position">职位名称</span>
+          <span class="job-company">惠州市龙门县南昆花竹旅游发展有限公司</span>
+          <span class="job-position">夏令营研学老师 / 地接统筹</span>
         </div>
-        <span class="job-date">2021.03 - 2023.05</span>
+        <span class="job-date">2024.07 - 2024.08</span>
       </div>
       <ul class="job-bullets">
-        <li><strong>数据成果</strong>，通过XX方法，实现XX结果</li>
-        <li>负责XX工作，优化XX流程，提升XX指标</li>
+        <li><strong>【项目统筹与执行】</strong>一周内快速上手夏令营全流程，独立承担地接统筹角色；累计接待8个夏令营团队，服务150余名孩子，负责活动策划、现场执行、物料准备、时间调配等全链条工作</li>
+        <li><strong>【客户满意度运营】</strong>承担摄影摄像、线上家长答疑、孩子心理疏导等综合服务；项目结束后满意度达100%，25%以上家长表示续课意向或主动口碑宣传</li>
       </ul>
     </article>
-  </section>
 
-  <!-- ===== 项目经历（可选） ===== -->
-  <section class="project-block" style="display: none;">
-    <h2>项目经历</h2>
-
-    <article class="project-item">
-      <div class="project-name">项目名称</div>
-      <div class="project-role">项目角色 · 2022.03 - 2022.09</div>
+    <article class="job-item">
+      <div class="job-header">
+        <div>
+          <span class="job-company">广交会</span>
+          <span class="job-position">行政文员（实习）</span>
+        </div>
+        <span class="job-date">2023.03 - 2023.05</span>
+      </div>
       <ul class="job-bullets">
-        <li><strong>项目成果</strong>，项目背景是XX，我负责XX，通过XX方法达成XX</li>
+        <li><strong>【行政事务与数据分析】</strong>负责日常办公事务处理及公文流转；设计并开展问卷调查，收集各方反馈并进行满意度数据分析，形成调研报告</li>
+        <li><strong>【跨部门沟通协调】</strong>承担接待来访及跨部门沟通协调工作，保障各部门间协作顺畅</li>
       </ul>
     </article>
   </section>
 
-  <!-- ===== 技能清单 ===== -->
-  <section class="skills-block">
-    <h2>技能清单</h2>
+  <section>
+    <h2>技能证书</h2>
     <div class="skills-section">
       <div class="skill-category">
-        <span class="skill-label">硬技能</span>
-        <span class="skill-content">技能1、技能2、技能3、技能4</span>
+        <span class="skill-label">语言能力</span>
+        <span class="skill-content">英语专业八级（TEM-8）、粤语</span>
       </div>
       <div class="skill-category">
-        <span class="skill-label">工具</span>
-        <span class="skill-content">工具1、工具2、工具3</span>
+        <span class="skill-label">专业技能</span>
+        <span class="skill-content">产品开发全流程管理、市场调研与竞品分析、供应链对接与管理、包装设计协调、备案合规审核、品牌视觉物料统筹</span>
       </div>
       <div class="skill-category">
-        <span class="skill-label">软技能</span>
-        <span class="skill-content">能力1、能力2、能力3</span>
+        <span class="skill-label">办公工具</span>
+        <span class="skill-content">熟练使用Office办公软件，了解Premiere Pro、Adobe Illustrator，熟练使用各类AI工具（Claude Code、Codex、Trae等）</span>
+      </div>
+      <div class="skill-category">
+        <span class="skill-label">核心素质</span>
+        <span class="skill-content">严谨细致（经手产品上市包装零错漏）、沟通协调（多方资源整合能力强）、自驱善学（从0起步快速成长为包装设计核心负责人）、时间管理（善抓任务主次，保障项目按期推进）</span>
       </div>
     </div>
   </section>
 
+  </div>
 </body>
 </html>
