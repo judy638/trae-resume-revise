@@ -64,7 +64,7 @@ async function generatePDF(htmlPath, outputPath) {
       },
       displayHeaderFooter: false,
       preferCSSPageSize: true,
-      scale: 0.95
+      // scale removed to fix whitespace
     });
 
     console.log(`✅ PDF 生成成功: ${outputPath}`);
