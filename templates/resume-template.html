@@ -14,10 +14,10 @@
       --color-bg: #ffffff;
       --font-cn: "PingFang SC", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
       --font-en: "Helvetica Neue", Arial, sans-serif;
-      --font-size-body: 10.5pt;
-      --font-size-heading: 12pt;
+      --font-size-body: 12pt;
+      --font-size-heading: 13pt;
       --font-size-name: 20pt;
-      --line-height: 1.5;
+      --line-height: 1.75;
       --section-gap: 14pt;
       --item-gap: 6pt;
     }
@@ -25,7 +25,7 @@
     /* ========== 打印设置 ========== */
     @page {
       size: A4;
-      margin: 1.5cm 2cm;
+      margin: 12pt 0 0 0;
     }
 
     @media print {
@@ -34,9 +34,6 @@
         -webkit-print-color-adjust: exact;
       }
       .job-item {
-        page-break-inside: avoid;
-      }
-      section {
         page-break-inside: avoid;
       }
     }
@@ -56,6 +53,8 @@
       background: var(--color-bg);
       max-width: 210mm;
       margin: 0 auto;
+      padding: 22pt 24pt 12pt 24pt;
+      position: relative;
     }
 
     /* ========== 头部区域 ========== */
@@ -63,9 +62,14 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: var(--section-gap);
-      padding-bottom: var(--section-gap);
+      padding: 22pt 24pt 12pt 24pt;
+      margin-bottom: 0;
+      margin-left: -24pt;
+      margin-right: -24pt;
+      margin-top: -22pt;
       border-bottom: 2px solid var(--color-accent);
+      position: relative;
+      z-index: 1;
     }
 
     .header-info {
@@ -112,6 +116,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 2pt;
     }
 
     .avatar-slot img {
@@ -126,24 +131,28 @@
 
     /* ========== 板块通用样式 ========== */
     section {
-      margin-bottom: var(--section-gap);
+      margin-bottom: 14pt;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
     }
 
     h2 {
       font-size: var(--font-size-heading);
       font-weight: 700;
       color: var(--color-primary);
-      padding-bottom: 4pt;
       margin-bottom: 10pt;
+      padding-bottom: 5pt;
       border-bottom: 1px solid var(--color-border);
       display: flex;
       align-items: center;
-      gap: 6pt;
+      gap: 5pt;
     }
 
     h2::before {
-      content: '\25A0';
-      font-size: 10pt;
+      content: "\25A0";
+      font-size: 9pt;
       color: var(--color-accent);
       line-height: 1;
     }
@@ -182,13 +191,13 @@
 
     .summary-list li {
       position: relative;
-      padding-left: 14pt;
-      margin-bottom: 4pt;
+      padding-left: 12pt;
+      margin-bottom: 5pt;
       font-size: var(--font-size-body);
     }
 
     .summary-list li::before {
-      content: '\2022';
+      content: "\2022";
       position: absolute;
       left: 0;
       color: var(--color-accent);
@@ -196,12 +205,44 @@
     }
 
     /* ========== 工作经历 ========== */
+    .experience-block {
+      position: relative;
+      counter-reset: job-counter;
+      padding-left: 18pt;
+    }
+
+    .experience-block > h2 {
+      margin-left: -18pt;
+    }
+
     .job-item {
+      position: relative;
+      counter-increment: job-counter;
+      margin-top: 6pt;
+      padding-top: 2pt;
       margin-bottom: 12pt;
     }
 
     .job-item:last-child {
       margin-bottom: 0;
+    }
+
+    .job-item::before {
+      content: counter(job-counter);
+      position: absolute;
+      left: -22pt;
+      top: 0;
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--color-accent);
+      opacity: 0.5;
+      line-height: 1;
+      font-style: italic;
+      font-family: var(--font-en), var(--font-cn);
+    }
+
+    .job-item:first-child::before {
+      top: -1pt;
     }
 
     .job-header {
@@ -244,10 +285,10 @@
     }
 
     .job-bullets li::before {
-      content: '\2022';
+      content: "\2022";
       position: absolute;
       left: 0;
-      top: 0;
+      top: 1pt;
       color: var(--color-accent);
       font-weight: bold;
       font-size: 11pt;
@@ -280,7 +321,7 @@
     .skills-section {
       display: flex;
       flex-direction: column;
-      gap: 6pt;
+      gap: 3pt;
     }
 
     .skill-category {
@@ -302,9 +343,82 @@
       color: var(--color-secondary);
       line-height: 1.6;
     }
+
+    /* ========== 装饰性圆圈水印 ========== */
+    .watermark-circle-1 {
+      position: absolute;
+      top: 60pt;
+      right: 20pt;
+      width: 100pt;
+      height: 100pt;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-accent);
+      opacity: 0.06;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .watermark-circle-2 {
+      position: absolute;
+      top: 180pt;
+      right: 60pt;
+      width: 60pt;
+      height: 60pt;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-accent);
+      opacity: 0.04;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .watermark-circle-3 {
+      position: absolute;
+      top: 400pt;
+      left: 10pt;
+      width: 80pt;
+      height: 80pt;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-accent);
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .watermark-circle-4 {
+      position: absolute;
+      top: 700pt;
+      right: 30pt;
+      width: 120pt;
+      height: 120pt;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-accent);
+      opacity: 0.03;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .watermark-circle-5 {
+      position: absolute;
+      top: 950pt;
+      left: 50pt;
+      width: 50pt;
+      height: 50pt;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-accent);
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+
+  <!-- 装饰性圆圈水印 -->
+  <div class="watermark-circle-1"></div>
+  <div class="watermark-circle-2"></div>
+  <div class="watermark-circle-3"></div>
+  <div class="watermark-circle-4"></div>
+  <div class="watermark-circle-5"></div>
 
   <!-- ===== 头部区域 ===== -->
   <header class="resume-header">

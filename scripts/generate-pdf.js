@@ -51,20 +51,20 @@ async function generatePDF(htmlPath, outputPath) {
     // 等待字体加载完成
     await page.evaluateHandle('document.fonts.ready');
 
-    // 生成 PDF
+    // 生成 PDF（margin 设为 0，间距由 HTML 模板 @page 和 body padding 控制）
     await page.pdf({
       path: outputPath,
       format: 'A4',
       printBackground: true,
       margin: {
-        top: '1.5cm',
-        bottom: '1.5cm',
-        left: '2cm',
-        right: '2cm'
+        top: '0',
+        bottom: '0',
+        left: '0',
+        right: '0'
       },
       displayHeaderFooter: false,
-      preferCSSPageSize: true,
-      // scale removed to fix whitespace
+      preferCSSPageSize: true
+      // scale 已移除，避免产生空白
     });
 
     console.log(`✅ PDF 生成成功: ${outputPath}`);
