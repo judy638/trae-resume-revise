@@ -1,7 +1,7 @@
 {
   "name": "resume-revise",
-  "version": "1.0.0",
-  "description": "资深HR视角的价值导向简历精修技能",
+  "version": "1.2.0",
+  "description": "资深HR视角的价值导向简历精修技能 - 含天眼查公司调研Tab导航建议书（自动授权检查+降级策略）",
   "private": true,
   "dependencies": {
     "docx": "^9.7.1",
