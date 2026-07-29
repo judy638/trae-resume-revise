@@ -316,6 +316,46 @@ body {
 .skill-item .skill-info .how { font-size: 13px; margin-top: 6px; padding: 8px 12px; background: var(--bg); border-radius: 6px; }
 .skill-item .skill-info .how strong { color: var(--accent); }
 
+/* Key Factors */
+.keyfactor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.keyfactor-card {
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--accent);
+  transition: transform 0.2s;
+}
+.keyfactor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.keyfactor-card .rank-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  background: #fef2f2;
+  color: #dc2626;
+}
+.keyfactor-card .rank-badge.s2 { background: #fff7ed; color: #ea580c; }
+.keyfactor-card .rank-badge.s3 { background: #fefce8; color: #ca8a04; }
+.keyfactor-card .rank-badge.s4 { background: #f0fdf4; color: #16a34a; }
+.keyfactor-card h4 { font-size: 15px; margin-bottom: 8px; }
+.keyfactor-card .why { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+.keyfactor-card .how {
+  font-size: 13px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: 6px;
+  line-height: 1.6;
+}
+.keyfactor-card .how strong { color: var(--accent); }
+
 /* Action Plan */
 .action-list {
   background: var(--bg2);
@@ -688,6 +728,42 @@ sup a:hover { text-decoration: underline; }
   <div class="section">
     <div class="section-title">
       <div class="icon" style="background:#dbeafe;color:var(--accent);">05</div>
+      求职关键因素 — 这个职业最看重什么
+    </div>
+    <div class="callout">
+      <strong>敲黑板：</strong>每个行业都有自己的"硬通货"。电商运营面试，HR 最先看的不是学历，而是你<strong>有没有拿得出手的项目数据</strong>。下面 4 项是决定你能否拿到 offer 的关键因素，按重要性排序。
+    </div>
+    <div class="keyfactor-grid">
+      <div class="keyfactor-card" style="border-top-color:#dc2626;">
+        <span class="rank-badge">TOP 1 · 硬通货</span>
+        <h4>项目数据成果</h4>
+        <div class="why">电商运营是结果导向型岗位，HR 第一眼就找数字。没有数据的运营经历等于没做。你的字节实习经历（GMV提升10%、大促30%增长）就是最好的敲门砖，比学历还重要。</div>
+        <div class="how"><strong>怎么准备</strong>：简历上每段经历必须有3个以上量化数据；面试时用STAR法则讲清楚"做了什么→用了什么方法→带来什么数据结果"；准备1个你最得意的项目案例，能讲5分钟。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#ea580c;">
+        <span class="rank-badge s2">TOP 2 · 加分项</span>
+        <h4>投流实操经验</h4>
+        <div class="why">80%的运营岗要求有投流经验，懂巨量千川的候选人薪资高30%。大部分应届生都没有，你如果有就直接拉开差距。哪怕只是协助投过1万块预算，也比完全没碰过强。</div>
+        <div class="how"><strong>怎么准备</strong>：如果没有投流经验，入职后主动申请参与；自学巨量千川基础教程（巨量大学有免费课程）；面试时诚实说明经验程度，但表达强烈学习意愿。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#ca8a04;">
+        <span class="rank-badge s3">TOP 3 · 软实力</span>
+        <h4>数据思维与逻辑</h4>
+        <div class="why">运营的核心能力不是执行力，而是"发现问题→分析原因→给出方案"的逻辑能力。面试中 case study 环节（比如"如果GMV突然下降20%，你怎么分析"）就是考察这个。</div>
+        <div class="how"><strong>怎么准备</strong>：练习结构化回答（先总后分、MECE原则）；准备一个"从数据中发现问题并解决"的案例；学习转化漏斗拆解方法，面试时能画出来。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#16a34a;">
+        <span class="rank-badge s4">TOP 4 · 认知项</span>
+        <h4>行业认知与平台理解</h4>
+        <div class="why">面试必问："你怎么看抖音电商未来的发展？"答得好说明你真的关注这个行业，而不是海投。答案不需要多深刻，但要有自己的观点，不能只会说"我觉得挺好的"。</div>
+        <div class="how"><strong>怎么准备</strong>：关注36氪、亿邦动力等行业媒体；了解抖音电商最新政策（货架场景、店播趋势、去头部化）；准备2-3个你关注的行业观点，能说清楚理由。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <div class="icon" style="background:#dbeafe;color:var(--accent);">06</div>
       行动建议
     </div>
     <div class="callout success">
@@ -946,6 +1022,42 @@ sup a:hover { text-decoration: underline; }
   <div class="section">
     <div class="section-title">
       <div class="icon" style="background:#fef3c7;color:var(--accent3);">05</div>
+      求职关键因素 — 这个职业最看重什么
+    </div>
+    <div class="callout warning">
+      <strong>敲黑板：</strong>内容运营的"硬通货"是<strong>你的作品集/账号案例</strong>。HR 拿到简历第一件事就是点开你的小红书/抖音账号看内容质量。没有作品集的内容运营求职者，通过率低 70%。
+    </div>
+    <div class="keyfactor-grid">
+      <div class="keyfactor-card" style="border-top-color:#dc2626;">
+        <span class="rank-badge">TOP 1 · 硬通货</span>
+        <h4>作品集 / 账号案例</h4>
+        <div class="why">内容运营=设计师，作品集就是你的简历。HR 不会相信你说"我很会做内容"，但会相信你做出来的 10 万+播放视频和 200% 粉丝增长数据。你的星芒传媒经验（3个月涨粉2万、播放量10万+）是核心筹码。</div>
+        <div class="how"><strong>怎么准备</strong>：整理你做过的最好的 5-10 条内容，做成 PDF 作品集（截图+数据+方法论说明）；如果有自己运营的账号，简历上直接放链接；准备1个"从0到1做账号"的完整案例。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#ea580c;">
+        <span class="rank-badge s2">TOP 2 · 加分项</span>
+        <h4>AI工具使用能力</h4>
+        <div class="why">2026年内容运营面试，"你用过哪些AI工具"几乎是必问题。会用 AI 的人一个人顶一个团队，公司当然愿意要。如果你能展示用 AI 批量生产内容的工作流，直接秒杀其他候选人。</div>
+        <div class="how"><strong>怎么准备</strong>：熟练掌握 ChatGPT（文案生成）、Midjourney/即梦（封面图）、剪映AI（视频剪辑）；建立自己的AI内容生产工作流（提示词模板+内容SOP）；面试时带1个用AI做内容的具体案例。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#ca8a04;">
+        <span class="rank-badge s3">TOP 3 · 软实力</span>
+        <h4>内容网感与爆款嗅觉</h4>
+        <div class="why">"网感"是内容行业的玄学，但 HR 能在5分钟内判断你有没有。面试时聊最近的热点、聊你关注的博主、聊你对某条爆款内容的分析——这些比你说"我很努力"管用10倍。</div>
+        <div class="how"><strong>怎么准备</strong>：每天刷1小时小红书/抖音，培养对热点的敏感度；关注5个以上同赛道头部账号，定期做爆款拆解；准备3个你最近关注的热点案例，能说出"为什么火"。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#16a34a;">
+        <span class="rank-badge s4">TOP 4 · 认知项</span>
+        <h4>垂直领域深度</h4>
+        <div class="why">泛内容运营越来越不值钱，垂直领域（美妆/穿搭/母婴/科技）的内容运营才稀缺。你越懂一个行业，内容就越有深度，AI 越难替代你。美妆内容运营的薪资比泛内容高 20-30%。</div>
+        <div class="how"><strong>怎么准备</strong>：选 1-2 个你感兴趣的垂直赛道（建议美妆/护肤，匹配你的消费者研究项目），深耕；了解该赛道的头部品牌、头部达人、热门话题；面试时展现你对这个赛道的深度理解。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <div class="icon" style="background:#fef3c7;color:var(--accent3);">06</div>
       行动建议
     </div>
     <div class="callout warning">
@@ -1204,6 +1316,42 @@ sup a:hover { text-decoration: underline; }
   <div class="section">
     <div class="section-title">
       <div class="icon" style="background:#d1fae5;color:var(--accent2);">05</div>
+      求职关键因素 — 这个职业最看重什么
+    </div>
+    <div class="callout success">
+      <strong>敲黑板：</strong>品牌营销的"硬通货"是<strong>你的商业洞察和策略思维</strong>。品牌岗面试不是考你会不会做 PPT，而是考你"能不能想清楚一个品牌为什么卖得好/卖得不好"。快消/美妆品牌管培生的录取率不到 5%，拼的就是认知深度。
+    </div>
+    <div class="keyfactor-grid">
+      <div class="keyfactor-card" style="border-top-color:#dc2626;">
+        <span class="rank-badge">TOP 1 · 硬通货</span>
+        <h4>商业洞察与策略思维</h4>
+        <div class="why">品牌营销的核心是"想清楚"，不是"做出来"。面试必问："你觉得完美日记为什么能起来？""你觉得花西子的定位是什么？"答得好直接进下一轮，答不好直接凉。你的消费者研究项目是天然的优势素材。</div>
+        <div class="how"><strong>怎么准备</strong>：选 3-5 个你关注的品牌，做深度拆解（定位→人群→产品→渠道→营销→问题）；准备 1 个"如果我是某品牌的市场经理，我会怎么做"的完整方案；用你的消费者研究项目展示调研能力。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#ea580c;">
+        <span class="rank-badge s2">TOP 2 · 加分项</span>
+        <h4>4A / 品牌方实习经历</h4>
+        <div class="why">头部品牌管培生招聘，80%的录取者有 4A 或知名品牌实习经历。你的双段互联网实习是差异化优势（数字化营销能力），但缺少品牌方/4A 经历是短板。</div>
+        <div class="how"><strong>怎么准备</strong>：如果还有时间，争取一段 4A 广告公司或美妆品牌市场部实习；如果没有，用你的消费者研究项目和数字化营销经验包装成"品牌研究+数字营销"复合定位；面试时强调你的互联网背景能给品牌带来数字化新视角。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#ca8a04;">
+        <span class="rank-badge s3">TOP 3 · 软实力</span>
+        <h4>表达与沟通能力</h4>
+        <div class="why">品牌经理 50% 的时间在沟通——跟老板讲策略、跟代理商讲 brief、跟销售讲方案、跟设计讲需求。表达能力差的人，策略再好也传不出去。群面是品牌岗的必经环节，就是考察这个。</div>
+        <div class="how"><strong>怎么准备</strong>：练习结构化表达（金字塔原理：结论先行→论点支撑→数据论据）；准备 3 个能讲 3 分钟的品牌案例；参加模拟群面，练习在团队讨论中有效发言。</div>
+      </div>
+      <div class="keyfactor-card" style="border-top-color:#16a34a;">
+        <span class="rank-badge s4">TOP 4 · 认知项</span>
+        <h4>英语能力 / 海外经历</h4>
+        <div class="why">外资快消（宝洁、联合利华、欧莱雅）的管培生项目对英语要求极高，面试全英文。国货品牌出海浪潮下，英语好的营销人才薪资溢价 30-50%。你的六级 550 分基础不错，但需提升商务英语能力。</div>
+        <div class="how"><strong>怎么准备</strong>：练习英文自我介绍和常见面试问题；准备 1-2 个能用英文讲的品牌案例；关注海外品牌营销案例（DTC品牌、海外社媒营销），展现国际化视野。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <div class="icon" style="background:#d1fae5;color:var(--accent2);">06</div>
       行动建议
     </div>
     <div class="callout success">
