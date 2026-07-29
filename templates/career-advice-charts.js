@@ -10,165 +10,195 @@
 
   var levels = ['助理', '专员', '主管', '经理', '总监'];
 
-  // --- Chart 1: 电商运营薪资 ---
-  var chart1 = echarts.init(document.getElementById('chart-ecommerce'), null, { renderer: 'svg' });
-  chart1.setOption({
-    animation: false,
-    tooltip: {
-      trigger: 'axis',
-      appendToBody: true,
-      formatter: function(params) {
-        var p = params[0];
-        return p.name + '<br/>月薪范围: ' + p.value + 'K';
-      }
-    },
-    grid: { left: 50, right: 30, top: 30, bottom: 40 },
-    xAxis: {
-      type: 'category',
-      data: levels,
-      axisLine: { lineStyle: { color: rule } },
-      axisLabel: { color: muted, fontSize: 13 }
-    },
-    yAxis: {
-      type: 'value',
-      name: '月薪 (K)',
-      nameTextStyle: { color: muted, fontSize: 12 },
-      axisLine: { show: false },
-      axisLabel: { color: muted, fontSize: 12 },
-      splitLine: { lineStyle: { color: rule, type: 'dashed' } }
-    },
-    series: [{
-      type: 'bar',
-      data: [5.75, 11.5, 15, 20, 40],
-      barWidth: '45%',
-      itemStyle: {
-        color: {
-          type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-          colorStops: [
-            { offset: 0, color: accent },
-            { offset: 1, color: accent + '66' }
-          ]
-        },
-        borderRadius: [6, 6, 0, 0]
-      },
-      label: {
-        show: true,
-        position: 'top',
-        color: ink,
-        fontSize: 13,
-        fontWeight: 600,
-        formatter: '{c}K'
-      }
-    }]
-  });
-  window.chartEcommerce = chart1;
-  window.addEventListener('resize', function() { chart1.resize(); });
+  // Track which charts have been initialized
+  var chartStates = { ecommerce: false, content: false, brand: false };
 
-  // --- Chart 2: 内容运营薪资 ---
-  var chart2 = echarts.init(document.getElementById('chart-content'), null, { renderer: 'svg' });
-  chart2.setOption({
-    animation: false,
-    tooltip: {
-      trigger: 'axis',
-      appendToBody: true,
-      formatter: function(params) {
-        var p = params[0];
-        return p.name + '<br/>月薪范围: ' + p.value + 'K';
-      }
-    },
-    grid: { left: 50, right: 30, top: 30, bottom: 40 },
-    xAxis: {
-      type: 'category',
-      data: levels,
-      axisLine: { lineStyle: { color: rule } },
-      axisLabel: { color: muted, fontSize: 13 }
-    },
-    yAxis: {
-      type: 'value',
-      name: '月薪 (K)',
-      nameTextStyle: { color: muted, fontSize: 12 },
-      axisLine: { show: false },
-      axisLabel: { color: muted, fontSize: 12 },
-      splitLine: { lineStyle: { color: rule, type: 'dashed' } }
-    },
-    series: [{
-      type: 'bar',
-      data: [6, 9, 15, 22.5, 35],
-      barWidth: '45%',
-      itemStyle: {
-        color: {
-          type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-          colorStops: [
-            { offset: 0, color: accent3 },
-            { offset: 1, color: accent3 + '66' }
-          ]
-        },
-        borderRadius: [6, 6, 0, 0]
+  function initChartEcommerce() {
+    if (chartStates.ecommerce) return;
+    var el = document.getElementById('chart-ecommerce');
+    if (!el || el.offsetWidth === 0) return;
+    var chart = echarts.init(el, null, { renderer: 'svg' });
+    chart.setOption({
+      animation: false,
+      tooltip: {
+        trigger: 'axis',
+        appendToBody: true,
+        formatter: function(params) {
+          var p = params[0];
+          return p.name + '<br/>月薪范围: ' + p.value + 'K';
+        }
       },
-      label: {
-        show: true,
-        position: 'top',
-        color: ink,
-        fontSize: 13,
-        fontWeight: 600,
-        formatter: '{c}K'
-      }
-    }]
-  });
-  window.chartContent = chart2;
-  window.addEventListener('resize', function() { chart2.resize(); });
+      grid: { left: 50, right: 30, top: 30, bottom: 40 },
+      xAxis: {
+        type: 'category',
+        data: levels,
+        axisLine: { lineStyle: { color: rule } },
+        axisLabel: { color: muted, fontSize: 13 }
+      },
+      yAxis: {
+        type: 'value',
+        name: '月薪 (K)',
+        nameTextStyle: { color: muted, fontSize: 12 },
+        axisLine: { show: false },
+        axisLabel: { color: muted, fontSize: 12 },
+        splitLine: { lineStyle: { color: rule, type: 'dashed' } }
+      },
+      series: [{
+        type: 'bar',
+        data: [5.75, 11.5, 15, 20, 40],
+        barWidth: '45%',
+        itemStyle: {
+          color: {
+            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: accent },
+              { offset: 1, color: accent + '66' }
+            ]
+          },
+          borderRadius: [6, 6, 0, 0]
+        },
+        label: {
+          show: true,
+          position: 'top',
+          color: ink,
+          fontSize: 13,
+          fontWeight: 600,
+          formatter: '{c}K'
+        }
+      }]
+    });
+    window.chartEcommerce = chart;
+    chartStates.ecommerce = true;
+  }
 
-  // --- Chart 3: 品牌营销薪资 ---
-  var chart3 = echarts.init(document.getElementById('chart-brand'), null, { renderer: 'svg' });
-  chart3.setOption({
-    animation: false,
-    tooltip: {
-      trigger: 'axis',
-      appendToBody: true,
-      formatter: function(params) {
-        var p = params[0];
-        return p.name + '<br/>月薪范围: ' + p.value + 'K';
-      }
-    },
-    grid: { left: 50, right: 30, top: 30, bottom: 40 },
-    xAxis: {
-      type: 'category',
-      data: levels,
-      axisLine: { lineStyle: { color: rule } },
-      axisLabel: { color: muted, fontSize: 13 }
-    },
-    yAxis: {
-      type: 'value',
-      name: '月薪 (K)',
-      nameTextStyle: { color: muted, fontSize: 12 },
-      axisLine: { show: false },
-      axisLabel: { color: muted, fontSize: 12 },
-      splitLine: { lineStyle: { color: rule, type: 'dashed' } }
-    },
-    series: [{
-      type: 'bar',
-      data: [6.25, 10.5, 15, 20, 35],
-      barWidth: '45%',
-      itemStyle: {
-        color: {
-          type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
-          colorStops: [
-            { offset: 0, color: accent2 },
-            { offset: 1, color: accent2 + '66' }
-          ]
-        },
-        borderRadius: [6, 6, 0, 0]
+  function initChartContent() {
+    if (chartStates.content) return;
+    var el = document.getElementById('chart-content');
+    if (!el || el.offsetWidth === 0) return;
+    var chart = echarts.init(el, null, { renderer: 'svg' });
+    chart.setOption({
+      animation: false,
+      tooltip: {
+        trigger: 'axis',
+        appendToBody: true,
+        formatter: function(params) {
+          var p = params[0];
+          return p.name + '<br/>月薪范围: ' + p.value + 'K';
+        }
       },
-      label: {
-        show: true,
-        position: 'top',
-        color: ink,
-        fontSize: 13,
-        fontWeight: 600,
-        formatter: '{c}K'
-      }
-    }]
+      grid: { left: 50, right: 30, top: 30, bottom: 40 },
+      xAxis: {
+        type: 'category',
+        data: levels,
+        axisLine: { lineStyle: { color: rule } },
+        axisLabel: { color: muted, fontSize: 13 }
+      },
+      yAxis: {
+        type: 'value',
+        name: '月薪 (K)',
+        nameTextStyle: { color: muted, fontSize: 12 },
+        axisLine: { show: false },
+        axisLabel: { color: muted, fontSize: 12 },
+        splitLine: { lineStyle: { color: rule, type: 'dashed' } }
+      },
+      series: [{
+        type: 'bar',
+        data: [6, 9, 15, 22.5, 35],
+        barWidth: '45%',
+        itemStyle: {
+          color: {
+            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: accent3 },
+              { offset: 1, color: accent3 + '66' }
+            ]
+          },
+          borderRadius: [6, 6, 0, 0]
+        },
+        label: {
+          show: true,
+          position: 'top',
+          color: ink,
+          fontSize: 13,
+          fontWeight: 600,
+          formatter: '{c}K'
+        }
+      }]
+    });
+    window.chartContent = chart;
+    chartStates.content = true;
+  }
+
+  function initChartBrand() {
+    if (chartStates.brand) return;
+    var el = document.getElementById('chart-brand');
+    if (!el || el.offsetWidth === 0) return;
+    var chart = echarts.init(el, null, { renderer: 'svg' });
+    chart.setOption({
+      animation: false,
+      tooltip: {
+        trigger: 'axis',
+        appendToBody: true,
+        formatter: function(params) {
+          var p = params[0];
+          return p.name + '<br/>月薪范围: ' + p.value + 'K';
+        }
+      },
+      grid: { left: 50, right: 30, top: 30, bottom: 40 },
+      xAxis: {
+        type: 'category',
+        data: levels,
+        axisLine: { lineStyle: { color: rule } },
+        axisLabel: { color: muted, fontSize: 13 }
+      },
+      yAxis: {
+        type: 'value',
+        name: '月薪 (K)',
+        nameTextStyle: { color: muted, fontSize: 12 },
+        axisLine: { show: false },
+        axisLabel: { color: muted, fontSize: 12 },
+        splitLine: { lineStyle: { color: rule, type: 'dashed' } }
+      },
+      series: [{
+        type: 'bar',
+        data: [6.25, 10.5, 15, 20, 35],
+        barWidth: '45%',
+        itemStyle: {
+          color: {
+            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: accent2 },
+              { offset: 1, color: accent2 + '66' }
+            ]
+          },
+          borderRadius: [6, 6, 0, 0]
+        },
+        label: {
+          show: true,
+          position: 'top',
+          color: ink,
+          fontSize: 13,
+          fontWeight: 600,
+          formatter: '{c}K'
+        }
+      }]
+    });
+    window.chartBrand = chart;
+    chartStates.brand = true;
+  }
+
+  // Expose init functions globally for tab switching
+  window.initChartEcommerce = initChartEcommerce;
+  window.initChartContent = initChartContent;
+  window.initChartBrand = initChartBrand;
+
+  // Init first tab chart immediately (it's visible)
+  initChartEcommerce();
+
+  // Global resize handler
+  window.addEventListener('resize', function() {
+    if (window.chartEcommerce) window.chartEcommerce.resize();
+    if (window.chartContent) window.chartContent.resize();
+    if (window.chartBrand) window.chartBrand.resize();
   });
-  window.chartBrand = chart3;
-  window.addEventListener('resize', function() { chart3.resize(); });
 })();

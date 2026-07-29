@@ -148,31 +148,46 @@ body {
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow);
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: flex;
   gap: 28px;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 24px;
 }
 .match-score {
   text-align: center;
+  flex-shrink: 0;
+  width: 160px;
+  padding-top: 8px;
 }
 .match-score .ring {
   width: 120px; height: 120px;
   margin: 0 auto 8px;
+  border-radius: 50%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.match-score .ring svg { transform: rotate(-90deg); }
-.match-score .ring .score-text {
+.match-score .ring .ring-inner {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  background: var(--bg2);
+  border-radius: 50%;
+  z-index: 1;
+}
+.match-score .ring .score-text {
   font-family: 'InstrumentSans', sans-serif;
   font-size: 32px;
   font-weight: 700;
+  position: relative;
+  z-index: 2;
 }
 .match-score .label { font-size: 13px; color: var(--muted); }
-.match-reasons { font-size: 14px; }
+.match-reasons {
+  font-size: 14px;
+  flex: 1;
+  min-width: 0;
+}
 .match-reasons h4 { font-size: 15px; margin-bottom: 10px; }
 .match-reasons ul { list-style: none; }
 .match-reasons li {
@@ -453,10 +468,16 @@ sup a:hover { text-decoration: underline; }
 /* Responsive */
 @media (max-width: 700px) {
   .profile-card { grid-template-columns: 1fr 1fr; }
-  .match-card { grid-template-columns: 1fr; }
+  .match-card { flex-direction: column; align-items: center; gap: 16px; }
+  .match-score { width: auto; padding-top: 0; }
+  .match-reasons { width: 100%; }
   .industry-grid { grid-template-columns: 1fr; }
+  .keyfactor-grid { grid-template-columns: 1fr; }
   .path-level { grid-template-columns: 28px 1fr; }
   .path-level .level-salary { grid-column: 2; text-align: left; }
+  .hero h1 { font-size: 22px; }
+  .profile-card { grid-template-columns: 1fr 1fr; }
+  .tab-btn { padding: 12px 14px; font-size: 13px; }
 }
 </style>
 </head>
@@ -510,11 +531,8 @@ sup a:hover { text-decoration: underline; }
     </div>
     <div class="match-card">
       <div class="match-score">
-        <div class="ring">
-          <svg width="120" height="120">
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/>
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#2563eb" stroke-width="8" stroke-dasharray="326.7" stroke-dashoffset="16.3" stroke-linecap="round"/>
-          </svg>
+        <div class="ring" style="background:conic-gradient(#2563eb 0% 95%, #e5e7eb 95% 100%);">
+          <div class="ring-inner"></div>
           <div class="score-text" style="color:#2563eb;">95%</div>
         </div>
         <div class="label">综合匹配度</div>
@@ -805,11 +823,8 @@ sup a:hover { text-decoration: underline; }
     </div>
     <div class="match-card">
       <div class="match-score">
-        <div class="ring">
-          <svg width="120" height="120">
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/>
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#d97706" stroke-width="8" stroke-dasharray="326.7" stroke-dashoffset="39.2" stroke-linecap="round"/>
-          </svg>
+        <div class="ring" style="background:conic-gradient(#d97706 0% 88%, #e5e7eb 88% 100%);">
+          <div class="ring-inner"></div>
           <div class="score-text" style="color:#d97706;">88%</div>
         </div>
         <div class="label">综合匹配度</div>
@@ -1099,11 +1114,8 @@ sup a:hover { text-decoration: underline; }
     </div>
     <div class="match-card">
       <div class="match-score">
-        <div class="ring">
-          <svg width="120" height="120">
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/>
-            <circle cx="60" cy="60" r="52" fill="none" stroke="#059669" stroke-width="8" stroke-dasharray="326.7" stroke-dashoffset="58.8" stroke-linecap="round"/>
-          </svg>
+        <div class="ring" style="background:conic-gradient(#059669 0% 82%, #e5e7eb 82% 100%);">
+          <div class="ring-inner"></div>
           <div class="score-text" style="color:#059669;">82%</div>
         </div>
         <div class="label">综合匹配度</div>
@@ -1499,10 +1511,12 @@ function switchTab(index) {
   document.querySelectorAll('.tab-panel').forEach((panel, i) => {
     panel.classList.toggle('active', i === index);
   });
-  // Resize charts when tab becomes visible
-  if (index === 0 && window.chartEcommerce) window.chartEcommerce.resize();
-  if (index === 1 && window.chartContent) window.chartContent.resize();
-  if (index === 2 && window.chartBrand) window.chartBrand.resize();
+  // Lazy init charts when tab becomes visible
+  setTimeout(function() {
+    if (index === 0 && window.initChartEcommerce) window.initChartEcommerce();
+    if (index === 1 && window.initChartContent) window.initChartContent();
+    if (index === 2 && window.initChartBrand) window.initChartBrand();
+  }, 50);
 }
 </script>
 
